@@ -1,3 +1,4 @@
+cryptography>=30.0.0
 docopt>=0.6.2
 pillow>=8.4.0; python_version >= "3.6"
 pycryptodome>=3.11.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")

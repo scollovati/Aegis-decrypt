@@ -2,3 +2,13 @@ dist/
 __pycache__
 .pytest_cache/
 .vscode/
+.idea/
+
+.DS_Store
+
+# virtual envs
+venv/
+.venv/
+
+# qr code generated
+*.svg
