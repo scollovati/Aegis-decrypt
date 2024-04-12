@@ -10,5 +10,6 @@ __pycache__
 venv/
 .venv/
 
-# qr code generated
+# file generated
 *.svg
+export.json

@@ -1,5 +1,5 @@
 import pytest
-import andotp_decrypt as ad
+from old_files import andotp_decrypt as ad
 import json
 from functools import partial
 

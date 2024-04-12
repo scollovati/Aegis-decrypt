@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""andotp-decrypt.py
+"""andotp-AegisDB.py
 
 Usage:
-andotp-decrypt.py [-o|--old] [--debug] [-h|--help] [--version] INPUT_FILE
+andotp-AegisDB.py [-o|--old] [--debug] [-h|--help] [--version] INPUT_FILE
 
 Options:
 -o --old      Use old encryption (andOTP <= 0.6.2)
