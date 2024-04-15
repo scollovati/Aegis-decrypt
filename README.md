@@ -1,7 +1,11 @@
 # Aegis-decrypt
-A backup decryptor for the [Aegis](https://github.com/beemdevelopment/Aegis/) Android app, inspired by [asmw/andOTP-decrypt](https://github.com/asmw/andOTP-decrypt).
+A backup decryptor for the [Aegis](https://github.com/beemdevelopment/Aegis/) Android app, inspired by [asmw/andOTP-decrypt](https://github.com/asmw/andOTP-decrypt). 
+Currently, the OTP generation and QRCode export are supported only for TOTP tokens.
 
-:warning: A few improvements, like `CSV` export are in progress.
+:warning: A few improvements are in progress:
+- export in plain CSV
+- export QRCodes in a unique PDF (simple paper backup)
+- support for OTP formats
 
 [![](https://img.shields.io/static/v1?label=Gitlab&message=Aegis-decrypt&style=for-the-badge&logo=gitlab)](https://gitlab.com/scollovati/Aegis-decrypt)
 [![](https://img.shields.io/static/v1?label=Github&message=Aegis-decrypt&style=for-the-badge&logo=github)](https://github.com/scollovati/Aegis-decrypt)
