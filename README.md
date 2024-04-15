@@ -33,13 +33,4 @@ The tools will be installed as:
 
 Pip install
 
-- `pip3 install --user -r requirements.txt` 
-
-## Usage
-
-- Dump JSON to the console:
-  - `./andotp_decrypt.py /path/to/otp_accounts.json.aes`
-- Generate new QR codes:
-  - `./generate_qr_codes.py /path/to/otp_accounts.json.aes`
-- Generate a TOTP code for your google account:
-  - `./generate_code.py /path/to/otp_accounts.json.aes google`
+- `pip3 install --user -r requirements.txt`
