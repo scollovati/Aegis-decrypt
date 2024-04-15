@@ -10,6 +10,6 @@ __pycache__
 venv/
 .venv/
 
-# file generated
+# file and folder generated
+export/
 *.svg
-export.json

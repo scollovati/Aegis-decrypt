@@ -11,9 +11,10 @@ from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 
 
 class AegisDB:
-    def __init__(self, db_path):
+    def __init__(self, db_path, password):
         self.backend = default_backend()
         self.db_path = db_path
+        self.entries = self.decrypt_db(password)
 
     def __die(self, msg, code=1):
         print(msg, file=sys.stderr)
@@ -72,19 +73,17 @@ class AegisDB:
 
         return json.loads(db.decode("utf-8"))['entries']
 
-    def all(self, entries):
-        # FIXME add header and better spacing
-        for entry in entries:
-            print(f"{entry['uuid']}  {entry['type']:5}  {entry['name']:<20}  {entry['issuer']:<20}  {entry['info']['secret']}  {entry['info']['algo']:6}  {entry['info']['digits']:2}  {entry['info'].get('period', '')}")
+    def getAll(self):
+        return self.entries
 
-    def getByName(self, entries, entryname):
+    def getByName(self, entryname):
         entries_found = []
 
-        for entry in entries:
+        for entry in self.entries:
             name = entry.get('name', '')
 
             # Looks also for substrings
-            if entryname in name.lower():
+            if entryname.lower() in name.lower():
                 entries_found.append(entry)
 
         return entries_found
