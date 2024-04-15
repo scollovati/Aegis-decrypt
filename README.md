@@ -1,17 +1,14 @@
-# andOTP-decrypt
+# Aegis-decrypt
 
-A backup decryptor for the [andOTP](https://github.com/andOTP/andOTP) Android app.
+A backup decryptor for the [Aegis](https://github.com/beemdevelopment/Aegis/) Android app, inspired by [asmw/andOTP-decrypt](https://github.com/asmw/andOTP-decrypt).
 
-The tools in this package support the password based backup files of andOTP in both the current (0.6.3) old (0.6.2 and before) format.
+:warning: A few improvements, like `CSV` export are in progress.
 
-Tools:
-
-- `andotp_decrypt.py`: A decryption tool for password-secured backups of the [andOTP](https://github.com/flocke/andOTP) two-factor android app.
-  - Output is written to stdout
-- `generate_qr_codes.py`: A tool to generate new, scanable QR code images for every entry of a dump
-  - Images are saved to the current working directory
-- `generate_code.py`: A tool to generate a TOTP token for an account in the backup
-
+## Usage
+```
+python3 aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}]
+```
+Exports are created in the folder `./export/` inside the projecy itself
 ## Installation
 
 `pip install andotp-decrypt`
@@ -24,22 +21,18 @@ The tools will be installed as:
 
 ## Development Setup
 
-[Poetry](https://python-poetry.org/) install (recommended)
+[Pipenv](https://pipenv.pypa.io/) install (recommended)
 
 - Install poetry
-  - `pip install poetry` (or use the recommended way from the website)
+  - `pip install --user pipenv` (or use the recommended way from the website)
 - Install everything else
-  - `poetry install`
+  - `pipenv install`
 - Launch the virtualenv
-  - `poetry shell`
+  - `pipenv shell`
 
 Pip install
 
-- `sudo pip3 install -r requirements.txt` 
-
-On debian/ubuntu this should work:
-
-- `sudo apt-get install python3-pycryptodome python3-pyotp python3-pyqrcode python3-pillow python3-docopt`
+- `pip3 install --user -r requirements.txt` 
 
 ## Usage
 
@@ -49,17 +42,3 @@ On debian/ubuntu this should work:
   - `./generate_qr_codes.py /path/to/otp_accounts.json.aes`
 - Generate a TOTP code for your google account:
   - `./generate_code.py /path/to/otp_accounts.json.aes google`
-
-## Thanks
-
-Thank you for contributing!
-
-- @alkuzad
-- @ant9000
-- @anthonycicc
-- @erik-h
-- @romed
-- @rubenvdham
-- @wornt
-- @naums
-- @marcopaganini

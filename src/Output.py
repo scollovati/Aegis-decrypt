@@ -40,6 +40,7 @@ class Output:
             print("Entries unencrypted saved as: %s" % path)
 
     def qrcode(self):
+        # FIXME put all QRcodes in PDF
         for entry in self.entries:
             if entry.get('type', '') == 'totp':
                 totp = EntryTOTP(entry)

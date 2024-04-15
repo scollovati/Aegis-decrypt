@@ -12,4 +12,4 @@ venv/
 
 # file and folder generated
 export/
-*.svg
+old_files/
