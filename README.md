@@ -10,15 +10,6 @@ A backup decryptor for the [Aegis](https://github.com/beemdevelopment/Aegis/) An
 python3 aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}]
 ```
 Exports are created in the folder `./export/` inside the projecy itself
-## Installation
-
-`pip install andotp-decrypt`
-
-The tools will be installed as:
-
-- `andotp_decrypt`
-- `andotp_gencode`
-- `andotp_qrcode`
 
 ## Development Setup
 
