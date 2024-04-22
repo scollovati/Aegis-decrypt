@@ -9,7 +9,7 @@ from src.EntryTOTP import EntryTOTP
 class Output:
     export_path = './export/'
 
-    def __init__(self, entries, entryname = None):
+    def __init__(self, entries, entryname=None):
         self.entries = entries
         os.makedirs(os.path.dirname(self.export_path), exist_ok=True)
         if entryname is None:
@@ -28,23 +28,25 @@ class Output:
         with io.open(path, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             for entry in self.entries:
-                writer.writerow([entry['uuid'], entry['type'], entry['name'], entry['issuer'],entry['info']['secret'], entry['info']['algo'], entry['info']['digits'], entry['info'].get('period', '')])
+                writer.writerow([entry['uuid'], entry['type'], entry['name'], entry['issuer'], entry['info']['secret'],
+                                 entry['info']['algo'], entry['info']['digits'], entry['info'].get('period', '')])
 
     def otp(self):
         for entry in self.entries:
             if entry.get('type', '') == 'totp':
                 totp = EntryTOTP(entry)
                 print("Entry %s - issuer %s - TOTP generated: %s" % (
-                entry.get('name', ''), entry.get('issuer', ''), totp.generateCode()))
+                    entry.get('name', ''), entry.get('issuer', ''), totp.generateCode()))
             else:
                 print("Entry %s - issuer %s - OTP type not supported: %s" % (
-                entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
+                    entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
 
     def json(self):
-        # FIXME insert the full unencrypted json?
         path = self.export_path + '.json'
         with io.open(path, "w") as f:
             f.write(json.dumps(self.entries, indent=4))
+            print(
+                "WARNING! The produced unencrypted JSON has not the same structure of the Aegis unencrypted export. This JSON contains only the \"entries\" array.")
             print("Entries unencrypted saved as: %s" % path)
 
     def qrcode(self):
@@ -56,18 +58,15 @@ class Output:
                 save_filename = self.export_path + self.gen_filename(entry.get('name'), entry.get('issuer')) + '.svg'
                 img.svg(save_filename, scale=4, background='#fff')
                 print("Entry %s - issuer %s - TOTP QRCode saved as: %s" % (
-                entry.get('name', ''), entry.get('issuer', ''), save_filename))
+                    entry.get('name', ''), entry.get('issuer', ''), save_filename))
             else:
                 print("Entry %s - issuer %s - OTP type not supported: %s" % (
-                entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
-
-
-
+                    entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
 
     def valid_filename_char(self, c):
         return c.isalpha() or c.isdigit() or c in "@_-"
 
-    def gen_filename(self, entryName, entryIssuer = None):
+    def gen_filename(self, entryName, entryIssuer=None):
         parts = []
         label = entryName
         if label:
