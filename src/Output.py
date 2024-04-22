@@ -1,6 +1,7 @@
 import io
 import json
 import os
+import csv
 
 from src.EntryTOTP import EntryTOTP
 
@@ -8,15 +9,26 @@ from src.EntryTOTP import EntryTOTP
 class Output:
     export_path = './export/'
 
-    def __init__(self, entries):
+    def __init__(self, entries, entryname = None):
         self.entries = entries
         os.makedirs(os.path.dirname(self.export_path), exist_ok=True)
+        if entryname is None:
+            self.file_path = self.export_path + 'aegis_unencrypted'
+        else:
+            self.file_path = self.export_path + 'aegis_unencrypted_' + self.gen_filename(entryname.lower())
 
     def stdout(self):
         # FIXME missing header
         for entry in self.entries:
             print(
                 f"{entry['uuid']}  {entry['type']:5}  {entry['name']:<20}  {entry['issuer']:<20}  {entry['info']['secret']}  {entry['info']['algo']:6}  {entry['info']['digits']:2}  {entry['info'].get('period', '')}")
+
+    def csv(self):
+        path = self.file_path + '.csv'
+        with io.open(path, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for entry in self.entries:
+                writer.writerow([entry['uuid'], entry['type'], entry['name'], entry['issuer'],entry['info']['secret'], entry['info']['algo'], entry['info']['digits'], entry['info'].get('period', '')])
 
     def otp(self):
         for entry in self.entries:
@@ -28,13 +40,9 @@ class Output:
                 print("Entry %s - issuer %s - OTP type not supported: %s" % (
                 entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
 
-    def json(self, entryname = None):
+    def json(self):
         # FIXME insert the full unencrypted json?
-        if entryname is None:
-            path = self.export_path + 'aegis_unencrypted.json'
-        else:
-            path = self.export_path + 'aegis_unencrypted_' + self.gen_filename(entryname.lower()) +'.json'
-
+        path = self.export_path + '.json'
         with io.open(path, "w") as f:
             f.write(json.dumps(self.entries, indent=4))
             print("Entries unencrypted saved as: %s" % path)
@@ -52,6 +60,9 @@ class Output:
             else:
                 print("Entry %s - issuer %s - OTP type not supported: %s" % (
                 entry.get('name', ''), entry.get('issuer', ''), entry.get('type', '')))
+
+
+
 
     def valid_filename_char(self, c):
         return c.isalpha() or c.isdigit() or c in "@_-"

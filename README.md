@@ -4,7 +4,7 @@ Currently, the OTP generation and QRCode export are supported only for TOTP toke
 
 :warning: A few improvements are in progress:
 - export in plain CSV
-- export QRCodes in a unique PDF (simple paper backup)
+- export QRCodes in a unique PDF or HTML (simple paper backup)
 - support for OTP formats
 
 [![](https://img.shields.io/static/v1?label=Gitlab&message=Aegis-decrypt&style=for-the-badge&logo=gitlab)](https://gitlab.com/scollovati/Aegis-decrypt)
@@ -19,7 +19,7 @@ Exports are created in the folder `./export/` inside the projecy itself
 
 [Pipenv](https://pipenv.pypa.io/) install (recommended)
 
-- Install poetry
+- Install Pipenv
   - `pip install --user pipenv` (or use the recommended way from the website)
 - Install everything else
   - `pipenv install`

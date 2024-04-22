@@ -30,15 +30,15 @@ def main():
         entries = db.getByName(args.entryname)
 
     if entries:
-        output = Output(entries)
+        output = Output(entries, args.entryname)
 
         match args.output:
             case 'csv':
-                print("TODO")
+                output.csv()
             case 'qrcode':
                 output.qrcode()
             case 'json':
-                output.json(args.entryname)
+                output.json()
             case 'otp':
                 output.otp()
             case _:
