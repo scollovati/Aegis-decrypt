@@ -19,9 +19,15 @@ def main():
                         help="The name of the entry for which you want to generate the OTP code")
     parser.add_argument("--output", dest="output", required=False, choices=[None, 'csv', 'qrcode', 'json', 'otp'],
                         help="The output format (default is stdout)")
+    parser.add_argument("--password", dest="password", required=False,
+                        help="The encryption password")
     args = parser.parse_args()
 
-    password = getpass.getpass().encode("utf-8")
+    if args.password is None:
+        password = getpass.getpass().encode("utf-8")
+    else:
+        password = args.password.encode("utf-8")
+
     db = AegisDB(args.vault, password)
 
     if args.entryname is None:
