@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-usage: aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}]
+usage: aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
 password: test
 """
 import argparse

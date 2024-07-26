@@ -27,6 +27,8 @@ class Output:
         path = self.file_path + '.csv'
         with io.open(path, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
+            header = ['uuid', 'type', 'name', 'issuer', 'secret', 'algo', 'digits', 'period']
+            writer.writerow(header)
             for entry in self.entries:
                 writer.writerow([entry['uuid'], entry['type'], entry['name'], entry['issuer'], entry['info']['secret'],
                                  entry['info']['algo'], entry['info']['digits'], entry['info'].get('period', '')])

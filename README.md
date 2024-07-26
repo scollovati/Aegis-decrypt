@@ -10,7 +10,7 @@ A backup decryptor and OTP generator for the vault of the [Aegis Authenticator](
 [![](https://img.shields.io/static/v1?label=Github&message=Aegis-decrypt&style=for-the-badge&logo=github)](https://github.com/scollovati/Aegis-decrypt)
 ## Usage
 ```
-python3 aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}]
+python3 aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
 ```
 Exports are created in the folder `./export/` inside the projecy itself
 
