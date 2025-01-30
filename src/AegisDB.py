@@ -76,14 +76,17 @@ class AegisDB:
     def getAll(self):
         return self.entries
 
-    def getByName(self, entryname):
+    def getByName(self, name, issuer):
+        assert(name or issuer)
         entries_found = []
 
         for entry in self.entries:
-            name = entry.get('name', '')
+            db_name   = entry.get('name', '')
+            db_issuer = entry.get('issuer', '')
 
             # Looks also for substrings
-            if entryname.lower() in name.lower():
+            if ( (name   == None or name.lower()   in db_name.lower()) and
+                 (issuer == None or issuer.lower() in db_issuer.lower()) ):
                 entries_found.append(entry)
 
         return entries_found

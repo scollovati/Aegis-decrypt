@@ -17,6 +17,8 @@ def main():
     # optional args
     parser.add_argument("--entryname", dest="entryname", required=False,
                         help="The name of the entry for which you want to generate the OTP code")
+    parser.add_argument("--issuer", dest="issuer", required=False,
+                        help="The name of the issuer for which you want to generate the OTP code")
     parser.add_argument("--output", dest="output", required=False, choices=[None, 'csv', 'qrcode', 'json', 'otp'],
                         help="The output format (default is stdout)")
     parser.add_argument("--password", dest="password", required=False,
@@ -30,10 +32,10 @@ def main():
 
     db = AegisDB(args.vault, password)
 
-    if args.entryname is None:
+    if args.entryname is None and args.issuer is None:
         entries = db.getAll()
     else:
-        entries = db.getByName(args.entryname)
+        entries = db.getByName(args.entryname, args.issuer)
 
     if entries:
         output = Output(entries, args.entryname)
