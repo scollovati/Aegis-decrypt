@@ -12,15 +12,15 @@ from src.Output import Output
 
 def main():
     parser = argparse.ArgumentParser(prog="aegis-decrypt.py",
-                                     description="Decrypt an Aegis vault and produce an output as requested", add_help=True)
-    parser.add_argument("--vault", dest="vault", required=True, help="The encrypted Aegis vault file")
+                                     description="Decrypt an Aegis vault and produce an output as requested.", add_help=True)
+    parser.add_argument("--vault", dest="vault", required=True, help="The encrypted Aegis vault file.")
     # optional args
     parser.add_argument("--entryname", dest="entryname", required=False,
-                        help="The name of the entry for which you want to generate the OTP code")
+                        help="The name of the entry for which you want to generate the OTP code.")
     parser.add_argument("--output", dest="output", required=False, choices=[None, 'csv', 'qrcode', 'json', 'otp'],
-                        help="The output format (default is stdout)")
+                        help="The output format. None means stdout.")
     parser.add_argument("--password", dest="password", required=False,
-                        help="The encryption password")
+                        help="The encryption password.")
     args = parser.parse_args()
 
     if args.password is None:

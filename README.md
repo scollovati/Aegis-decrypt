@@ -24,6 +24,10 @@ Exports are created in the folder `./export/` inside the projecy itself
   - `pipenv install`
 - Launch the virtualenv
   - `pipenv shell`
+- Update dependencies
+  - `pipenv update`
+- Generate requirements.txt output from lock file:
+  - `pipenv requirements > requirements.txt`
 
 Pip install
 
