@@ -32,3 +32,14 @@ Exports are created in the folder `./export/` inside the project itself
 Pip install
 
 - `pip3 install --user -r requirements.txt`
+
+## Project Management
+Since this repo is spread across several remotes, it may happen that there are some pull/merge request need to be handled locally.
+- Add the remote repository URL with a meaningful NAME: `git remote add NAME URL `
+- Create a local BRANCH name from the GitHub pull request ID: `git fetch origin pull/$ID/head:$BRANCHNAME`
+
+## Contributors
+- [asmw](https://github.com/asmw): original andOTP-decrypt repository on GitHub
+- [scollovati](https://gitlab.com/scollovati/): forked andOTP-decrypt and setup the Aegis-decrypt project
+- [kvngvikram](https://github.com/kvngvikram)
+- [combolek](https://github.com/combolek)
