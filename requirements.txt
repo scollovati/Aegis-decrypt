@@ -1,5 +1,6 @@
-cffi==1.17.1; python_version >= '3.8'
-cryptography==44.0.0; python_version >= '3.7' and python_full_version not in '3.9.0, 3.9.1'
+-i https://pypi.org/simple
+cffi==1.17.1; platform_python_implementation != 'PyPy'
+cryptography==44.0.1; python_version >= '3.7' and python_full_version not in '3.9.0, 3.9.1'
 docopt==0.6.2
 pillow==11.1.0; python_version >= '3.9'
 pycparser==2.22; python_version >= '3.8'
