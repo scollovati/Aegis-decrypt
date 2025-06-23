@@ -16,22 +16,11 @@ Exports are created in the folder `./export/` inside the project itself
 
 ## Development Setup
 
-[Pipenv](https://pipenv.pypa.io/) install (recommended)
-
-- Install Pipenv
-  - `pip install --user pipenv` (or use the recommended way from the website)
-- Install everything else
-  - `pipenv install`
-- Launch the virtualenv
-  - `pipenv shell`
-- Update dependencies
-  - `pipenv update`
-- Generate requirements.txt output from lock file:
-  - `pipenv requirements > requirements.txt`
-
-Pip install
-
-- `pip3 install --user -r requirements.txt`
+- Install [Poetry](https://python-poetry.org/docs/#installation)  (recommended)
+- Install the package: `poetry install`
+- Run the program : `poetry run python aegis-decrypt.py`
+- Update dependencies: `poetry update`
+- Execute Bandit `poetry run bandit -c pyproject.toml -r .`
 
 ## Project Management
 Since this repo is spread across several remotes, it may happen that there are some pull/merge request need to be handled locally.

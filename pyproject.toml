@@ -1,0 +1,45 @@
+[project]
+name = "scollovati-aegis-decrypt"
+version = "v0.0.3"
+description = "A backup decryptor and OTP generator for the vault of the Aegis Authenticator Android app."
+authors = [
+    {name = "scollovati",email = "7891942-scollovati@users.noreply.gitlab.com"}
+]
+license = { text = "GPL-3.0-only" }
+readme = "README.md"
+packages = [
+    { include = "aegis-decrypt.py" },
+    { include = "src/**.py" },
+]
+requires-python = ">=3.13"
+keywords = ["otp-generator", "AEGIS", "2FA", "authenticator"]
+dependencies = [
+    "cryptography>=45.0",
+    "docopt>=0.6",
+    "pillow>=8.4",
+    "pycryptodome>=3.23",
+    "pyotp>=2.9",
+    "pyqrcode>=1.2"
+]
+
+[project.urls]
+repository = "https://gitlab.com/scollovati/Aegis-decrypt"
+
+[project.scripts]
+aegis_decrypt = 'aegis-decrypt:main'
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+bandit = ">=1.8"
+black = ">=25.1"
+pylint = ">=3.3"
+
+[tool.bandit]
+exclude_dirs = ["venv"]
+
+[tool.pylint.format]
+max-line-length = "88"
+
