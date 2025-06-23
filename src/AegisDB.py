@@ -39,7 +39,7 @@ class AegisDB:
                 n=slot["n"],
                 r=slot["r"],
                 p=slot["p"],
-                backend=self.backend
+                backend=self.backend,
             )
             key = kdf.derive(password)
 
@@ -50,14 +50,16 @@ class AegisDB:
                 master_key = cipher.decrypt(
                     nonce=bytes.fromhex(params["nonce"]),
                     data=bytes.fromhex(slot["key"]) + bytes.fromhex(params["tag"]),
-                    associated_data=None
+                    associated_data=None,
                 )
                 break
             except cryptography.exceptions.InvalidTag:
                 pass
 
         if master_key is None:
-            self.__die("error: unable to decrypt the master key with the given password")
+            self.__die(
+                "error: unable to decrypt the master key with the given password"
+            )
 
         # decode the base64 vault contents
         content = base64.b64decode(data["db"])
@@ -68,25 +70,25 @@ class AegisDB:
         db = cipher.decrypt(
             nonce=bytes.fromhex(params["nonce"]),
             data=content + bytes.fromhex(params["tag"]),
-            associated_data=None
+            associated_data=None,
         )
 
-        return json.loads(db.decode("utf-8"))['entries']
+        return json.loads(db.decode("utf-8"))["entries"]
 
     def getAll(self):
         return self.entries
 
     def getByName(self, name, issuer):
-        assert(name or issuer)
         entries_found = []
 
         for entry in self.entries:
-            db_name   = entry.get('name', '')
-            db_issuer = entry.get('issuer', '')
+            db_name = entry.get("name", "")
+            db_issuer = entry.get("issuer", "")
 
             # Looks also for substrings
-            if ( (name   == None or name.lower()   in db_name.lower()) and
-                 (issuer == None or issuer.lower() in db_issuer.lower()) ):
+            if (name == None or name.lower() in db_name.lower()) and (
+                issuer == None or issuer.lower() in db_issuer.lower()
+            ):
                 entries_found.append(entry)
 
         return entries_found

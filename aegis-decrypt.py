@@ -11,18 +11,37 @@ from src.Output import Output
 
 
 def main():
-    parser = argparse.ArgumentParser(prog="aegis-decrypt.py",
-                                     description="Decrypt an Aegis vault and produce an output as requested.", add_help=True)
-    parser.add_argument("--vault", dest="vault", required=True, help="The encrypted Aegis vault file.")
+    parser = argparse.ArgumentParser(
+        prog="aegis-decrypt.py",
+        description="Decrypt an Aegis vault and produce an output as requested.",
+        add_help=True,
+    )
+    parser.add_argument(
+        "--vault", dest="vault", required=True, help="The encrypted Aegis vault file."
+    )
     # optional args
-    parser.add_argument("--entryname", dest="entryname", required=False,
-                        help="The name of the entry for which you want to generate the OTP code.")
-    parser.add_argument("--issuer", dest="issuer", required=False,
-                        help="The name of the issuer for which you want to generate the OTP code.")
-    parser.add_argument("--output", dest="output", required=False, choices=[None, 'csv', 'qrcode', 'json', 'otp'],
-                        help="The output format. None means stdout.")
-    parser.add_argument("--password", dest="password", required=False,
-                        help="The encryption password.")
+    parser.add_argument(
+        "--entryname",
+        dest="entryname",
+        required=False,
+        help="The name of the entry for which you want to generate the OTP code.",
+    )
+    parser.add_argument(
+        "--issuer",
+        dest="issuer",
+        required=False,
+        help="The name of the issuer for which you want to generate the OTP code.",
+    )
+    parser.add_argument(
+        "--output",
+        dest="output",
+        required=False,
+        choices=[None, "csv", "qrcode", "json", "otp"],
+        help="The output format. None means stdout.",
+    )
+    parser.add_argument(
+        "--password", dest="password", required=False, help="The encryption password."
+    )
     args = parser.parse_args()
 
     if args.password is None:
@@ -41,13 +60,13 @@ def main():
         output = Output(entries, args.entryname)
 
         match args.output:
-            case 'csv':
+            case "csv":
                 output.csv()
-            case 'qrcode':
+            case "qrcode":
                 output.qrcode()
-            case 'json':
+            case "json":
                 output.json()
-            case 'otp':
+            case "otp":
                 output.otp()
             case _:
                 output.stdout()
@@ -55,5 +74,5 @@ def main():
         print("No entries found")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
