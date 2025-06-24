@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """
-usage: aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
+usage: aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
 password: test
 """
+
 import argparse
 import getpass
 
-from src.AegisDB import AegisDB
-from src.Output import Output
+from src.aegis_db import AegisDB
+from src.output import Output
 
 
 def main():
+    """
+    Aegis decryptor main function.
+    """
     parser = argparse.ArgumentParser(
-        prog="aegis-decrypt.py",
+        prog="aegis_decrypt.py",
         description="Decrypt an Aegis vault and produce an output as requested.",
         add_help=True,
     )
@@ -52,9 +56,9 @@ def main():
     db = AegisDB(args.vault, password)
 
     if args.entryname is None and args.issuer is None:
-        entries = db.getAll()
+        entries = db.get_all()
     else:
-        entries = db.getByName(args.entryname, args.issuer)
+        entries = db.get_by_name(args.entryname, args.issuer)
 
     if entries:
         output = Output(entries, args.entryname)

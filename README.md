@@ -10,7 +10,7 @@ A backup decryptor and OTP generator for the vault of the [Aegis Authenticator](
 [![](https://img.shields.io/static/v1?label=Github&message=Aegis-decrypt&style=for-the-badge&logo=github)](https://github.com/scollovati/Aegis-decrypt)
 ## Usage
 ```
-python3 aegis-decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
+python3 aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
 ```
 Exports are created in the folder `./export/` inside the project itself
 
@@ -18,9 +18,11 @@ Exports are created in the folder `./export/` inside the project itself
 
 - Install [Poetry](https://python-poetry.org/docs/#installation)  (recommended)
 - Install the package: `poetry install`
-- Run the program : `poetry run python aegis-decrypt.py`
+- Run the program : `poetry run python aegis_decrypt.py`
 - Update dependencies: `poetry update`
 - Execute Bandit `poetry run bandit -c pyproject.toml -r .`
+- Execute Black `poetry run black .`
+- Execute Pylint `poetry run pylint .`
 
 ## Project Management
 Since this repo is spread across several remotes, it may happen that there are some pull/merge request need to be handled locally.

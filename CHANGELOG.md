@@ -1,7 +1,8 @@
 # Changelog
 ## v0.0.3
 Changed package manager from Pipenv to Poetry
-Added QA tools: bandit, black, pylint
+Added QA tools: bandit, black, pylint, pyupgrade
+Reformatted project filenames
 
 ## v0.0.2
 Added ISSUER as a CLI argument.

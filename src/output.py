@@ -1,12 +1,16 @@
+import csv
 import io
 import json
 import os
-import csv
 
-from src.EntryTOTP import EntryTOTP
+from src.entry_totp import EntryTOTP
 
 
 class Output:
+    """
+    Class to control the output format.
+    """
+
     export_path = "./export/"
 
     def __init__(self, entries, entryname=None):
@@ -30,7 +34,7 @@ class Output:
 
     def csv(self):
         path = self.file_path + ".csv"
-        with io.open(path, "w", newline="") as csvfile:
+        with io.open(path, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
             header = [
                 "uuid",
@@ -62,38 +66,28 @@ class Output:
             if entry.get("type", "") == "totp":
                 totp = EntryTOTP(entry)
                 print(
-                    "Entry %s - issuer %s - TOTP generated: %s"
-                    % (
-                        entry.get("name", ""),
-                        entry.get("issuer", ""),
-                        totp.generateCode(),
-                    )
+                    f"Entry {entry.get("name", "")} - issuer {entry.get("issuer", "")} - TOTP generated: {totp.generate_code()}"
                 )
             else:
                 print(
-                    "Entry %s - issuer %s - OTP type not supported: %s"
-                    % (
-                        entry.get("name", ""),
-                        entry.get("issuer", ""),
-                        entry.get("type", ""),
-                    )
+                    f"Entry {entry.get("name", "")} - issuer {entry.get("issuer", "")} - OTP type not supported: {entry.get("type", "")}"
                 )
 
     def json(self):
         path = self.export_path + ".json"
-        with io.open(path, "w") as f:
+        with io.open(path, "w", encoding="utf-8") as f:
             f.write(json.dumps(self.entries, indent=4))
             print(
                 'WARNING! The produced unencrypted JSON has not the same structure of the Aegis unencrypted export. This JSON contains only the "entries" array.'
             )
-            print("Entries unencrypted saved as: %s" % path)
+            print(f"Entries unencrypted saved as: {path}")
 
     def qrcode(self):
         # FIXME put all QRcodes in PDF
         for entry in self.entries:
             if entry.get("type", "") == "totp":
                 totp = EntryTOTP(entry)
-                img = totp.generateQRCode()
+                img = totp.generate_qr_code()
                 save_filename = (
                     self.export_path
                     + self.gen_filename(entry.get("name"), entry.get("issuer"))
@@ -101,28 +95,22 @@ class Output:
                 )
                 img.svg(save_filename, scale=4, background="#fff")
                 print(
-                    "Entry %s - issuer %s - TOTP QRCode saved as: %s"
-                    % (entry.get("name", ""), entry.get("issuer", ""), save_filename)
+                    f"Entry {entry.get("name", "")} - issuer {entry.get("issuer", "")} - TOTP QRCode saved as: {save_filename}"
                 )
             else:
                 print(
-                    "Entry %s - issuer %s - OTP type not supported: %s"
-                    % (
-                        entry.get("name", ""),
-                        entry.get("issuer", ""),
-                        entry.get("type", ""),
-                    )
+                    f"Entry {entry.get("name", "")} - issuer {entry.get("issuer", "")} - OTP type not supported: {entry.get("type", "")}"
                 )
 
     def valid_filename_char(self, c):
         return c.isalpha() or c.isdigit() or c in "@_-"
 
-    def gen_filename(self, entryName, entryIssuer=None):
+    def gen_filename(self, entry_name, entry_issuer=None):
         parts = []
-        label = entryName
+        label = entry_name
         if label:
             parts.append(label)
-        issuer = entryIssuer
+        issuer = entry_issuer
         if issuer:
             parts.append(issuer)
 

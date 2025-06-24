@@ -11,6 +11,10 @@ from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 
 
 class AegisDB:
+    """
+    Class to decrypt and search inside the Aegis vault db.
+    """
+
     def __init__(self, db_path, password):
         self.backend = default_backend()
         self.db_path = db_path
@@ -18,11 +22,11 @@ class AegisDB:
 
     def __die(self, msg, code=1):
         print(msg, file=sys.stderr)
-        exit(code)
+        sys.exit(code)
 
     # decrypt the Aegis vault file to a Python object
     def decrypt_db(self, password):
-        with io.open(self.db_path, "r") as f:
+        with io.open(self.db_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         # extract all password slots from the header
@@ -75,10 +79,10 @@ class AegisDB:
 
         return json.loads(db.decode("utf-8"))["entries"]
 
-    def getAll(self):
+    def get_all(self):
         return self.entries
 
-    def getByName(self, name, issuer):
+    def get_by_name(self, name, issuer):
         entries_found = []
 
         for entry in self.entries:
@@ -86,8 +90,8 @@ class AegisDB:
             db_issuer = entry.get("issuer", "")
 
             # Looks also for substrings
-            if (name == None or name.lower() in db_name.lower()) and (
-                issuer == None or issuer.lower() in db_issuer.lower()
+            if (name is None or name.lower() in db_name.lower()) and (
+                issuer is None or issuer.lower() in db_issuer.lower()
             ):
                 entries_found.append(entry)
 
