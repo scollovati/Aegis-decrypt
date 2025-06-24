@@ -27,12 +27,21 @@ repository = "https://gitlab.com/scollovati/Aegis-decrypt"
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+packages = [
+    {include = "aegis_decrypt.py"},
+    {include = "*", from = "src"}
+]
+
 [tool.poetry.group.dev.dependencies]
 bandit = ">=1.8"
 black = ">=25.1"
 pylint = ">=3.3"
 pyupgrade = ">=3.20.0"
 mypy = "^1.16.1"
+
+[tool.poetry.scripts]
+aegis_decrypt = 'aegis_decrypt:main'
 
 [tool.bandit]
 exclude_dirs = [".venv", "export", "temp"]

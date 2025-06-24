@@ -19,7 +19,7 @@ Exports are created in the folder `./export/` inside the project itself
 
 - Install [Poetry](https://python-poetry.org/docs/#installation)  (recommended)
 - Install the package: `poetry install`
-- Run the program : `poetry run python aegis_decrypt.py`
+- Run the program : `poetry run python aegis_decrypt.py [args]` or `poetry run aegis_decrypt [args]`
 - Update dependencies: `poetry update`
 - Execute Bandit `poetry run bandit -c pyproject.toml -r .`
 - Execute Black `poetry run black .`
