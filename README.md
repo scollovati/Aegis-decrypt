@@ -7,6 +7,7 @@ A backup decryptor and OTP generator for the vault of the [Aegis Authenticator](
 - support for HOTP format
 
 [![](https://img.shields.io/static/v1?label=Gitlab&message=Aegis-decrypt&style=for-the-badge&logo=gitlab)](https://gitlab.com/scollovati/Aegis-decrypt)
+[![](https://img.shields.io/static/v1?label=Codeberg&message=Aegis-decrypt&style=for-the-badge&logo=codeberg)](https://codeberg.org/scollovati/Aegis-decrypt)
 [![](https://img.shields.io/static/v1?label=Github&message=Aegis-decrypt&style=for-the-badge&logo=github)](https://github.com/scollovati/Aegis-decrypt)
 ## Usage
 ```
@@ -22,6 +23,7 @@ Exports are created in the folder `./export/` inside the project itself
 - Update dependencies: `poetry update`
 - Execute Bandit `poetry run bandit -c pyproject.toml -r .`
 - Execute Black `poetry run black .`
+- Execute MyPy `poetry run mypy .`
 - Execute Pylint `poetry run pylint .`
 
 ## Project Management
