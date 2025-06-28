@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-usage: aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {None,csv,qrcode,json,otp}] [--password PASSWORD]
+usage: aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {stdout,csv,qrcode,json,otp}] [--password PASSWORD]
 password: test
 """
 
@@ -40,8 +40,9 @@ def main():
         "--output",
         dest="output",
         required=False,
-        choices=[None, "csv", "qrcode", "json", "otp"],
-        help="The output format. None means stdout.",
+        choices=["csv", "qrcode", "json", "otp", "stdout"],
+        default="stdout",
+        help="The output format. Default: %(default)s",
     )
     parser.add_argument(
         "--password", dest="password", required=False, help="The encryption password."
