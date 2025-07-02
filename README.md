@@ -28,8 +28,8 @@ Exports are created in the folder `./export/` inside the project itself
 
 ## Project Management
 Since this repo is spread across several remotes, it may happen that there are some pull/merge request need to be handled locally.
-- Add the remote repository URL with a meaningful NAME: `git remote add NAME URL `
-- Create a local BRANCH name from the GitHub pull request ID: `git fetch origin pull/$ID/head:$BRANCHNAME`
+- Add the remote repository URL with a meaningful NAME: `git remote add REMOTE-NAME REMOTE-URL`
+- Create a local BRANCH name from the GitHub pull request ID: `git fetch REMOTE-NAME pull/$ID/head:$BRANCHNAME`
 
 ## Contributors
 - [asmw](https://github.com/asmw): original andOTP-decrypt repository on GitHub
