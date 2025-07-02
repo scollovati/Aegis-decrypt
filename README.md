@@ -36,3 +36,4 @@ Since this repo is spread across several remotes, it may happen that there are s
 - [scollovati](https://gitlab.com/scollovati/): forked andOTP-decrypt and setup the Aegis-decrypt project
 - [kvngvikram](https://github.com/kvngvikram)
 - [combolek](https://github.com/combolek)
+- [juergenhoetzel](https://github.com/juergenhoetzel)

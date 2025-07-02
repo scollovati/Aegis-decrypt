@@ -1,6 +1,6 @@
 [project]
 name = "scollovati-aegis-decrypt"
-version = "v0.0.3"
+version = "v0.0.4"
 description = "A backup decryptor and OTP generator for the vault of the Aegis Authenticator Android app."
 authors = [
     {name = "scollovati"}

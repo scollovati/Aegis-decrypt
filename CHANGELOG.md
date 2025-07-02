@@ -1,4 +1,7 @@
 # Changelog
+## v0.0.4
+Remove None as an output choice. Replace it with 'stdout' for clarity. Set 'stdout' as the default output format.
+
 ## v0.0.3
 Changed package manager from Pipenv to Poetry
 Added QA tools: bandit, black, pylint, pyupgrade
