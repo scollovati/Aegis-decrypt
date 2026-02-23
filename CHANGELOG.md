@@ -1,4 +1,7 @@
 # Changelog
+## v0.0.7
+Added `--search` field and `otpauth` export (by `dineshgyl`).
+
 ## v0.0.6
 The export folder now is inside the vault directory.
 

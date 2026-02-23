@@ -14,7 +14,7 @@ After installing it with Poetry, run ```bash poetry run python aegis_decrypt.py 
 
 The output is:
 ```
-usage: aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--output {csv,qrcode,json,otp,stdout}] [--password PASSWORD]
+usage: aegis_decrypt.py [-h] --vault VAULT [--entryname ENTRYNAME] [--issuer ISSUER] [--search SEARCH] [--output {csv,qrcode,json,otp,stdout,otpauth}] [--password PASSWORD]
 
 Decrypt an Aegis vault and produce an output as requested. Exported and unencrypted files are placed in a folder `export/` created inside the folder where the vault is.
 
@@ -24,9 +24,10 @@ options:
   --entryname ENTRYNAME
                         The name of the entry for which you want to generate the OTP code.
   --issuer ISSUER       The name of the issuer for which you want to generate the OTP code.
-  --output {csv,qrcode,json,otp,stdout}
+  --search SEARCH       Search for a string in all fields of all entries including the note field.
+  --output {csv,qrcode,json,otp,stdout,otpauth}
                         The output format. Default: otp
-  --password PASSWORD   The encryption password
+  --password PASSWORD   The encryption password.
 ```
 
 ## Development Setup
@@ -51,3 +52,4 @@ Since this repo is spread across several remotes, it may happen that there are s
 - [kvngvikram](https://github.com/kvngvikram)
 - [combolek](https://github.com/combolek)
 - [juergenhoetzel](https://github.com/juergenhoetzel)
+- [dineshgyl](https://github.com/dineshgyl)
