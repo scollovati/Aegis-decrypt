@@ -59,7 +59,6 @@ class Output:
                         f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<30} - OTP type not supported: {entry.get('type', ''):<6}"
                     )
 
-        print('WARNING! The produced unencrypted CSV.')
         print(f"Entries unencrypted saved as: {path}")
 
     def csv(self) -> None:
