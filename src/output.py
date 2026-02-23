@@ -35,7 +35,7 @@ class Output:
             
             # Print main entry info
             print(
-                f"{entry['uuid']}  {entry['type']:5}  {entry['name']:<20}  {entry['issuer']:<20}  {entry['info']['secret']}  {entry['info']['algo']:6}  {entry['info']['digits']:2}  {entry['info'].get('period', '')}"
+                f"{entry['uuid']}  {entry['type']:5}  {entry['name']:<45}  {entry['issuer']:<35}  {entry['info']['secret']}  {entry['info']['algo']:6}  {entry['info']['digits']:2}  {entry['info'].get('period', '')}"
             )
 
             note = entry.get('note', '')
@@ -56,7 +56,7 @@ class Output:
                     f.write(Lurl + "\n")
                 else:
                     print(
-                        f"Entry {entry.get('name', ''):<40} - Issuer {entry.get('issuer', ''):<30} - OTP type not supported: {entry.get('type', ''):<6}"
+                        f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<30} - OTP type not supported: {entry.get('type', ''):<6}"
                     )
 
         print('WARNING! The produced unencrypted CSV.')
@@ -136,11 +136,11 @@ class Output:
                 )
                 img.png(save_filename, scale=4, background="#fff")
                 print(
-                    f"Entry {entry.get('name', ''):<25} - Issuer {entry.get('issuer', ''):<25} - TOTP QRCode saved as: {save_filename:<100}"
+                    f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<35} - TOTP QRCode saved as: {save_filename:<100}"
                 )
             else:
                 print(
-                    f"Entry {entry.get('name', ''):<25} - Issuer {entry.get('issuer', ''):<25} - OTP type not supported: {entry.get('type', ''):<6}"
+                    f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<35} - OTP type not supported: {entry.get('type', ''):<6}"
                 )
 
     def _print_note_context(self, note) -> None:
