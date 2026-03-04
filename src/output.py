@@ -10,7 +10,7 @@ class Output:
     Class to control the output format.
     """
 
-    _FILENAME_PLAIN = "aegis_plain"
+    _FILENAME_PLAIN = "aegis-backup-plain"
 
     def __init__(self, entries: list, entry_name:str|None = None, export_base_path: str = ".", search_term: str|None = None):
         self._entries = entries

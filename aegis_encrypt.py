@@ -7,8 +7,8 @@ import sys
 
 
 def main() -> None:
-    plain = "./testdata/aegis_plain.json"
-    encrypted = "./testdata/aegis_encrypted_TEST.json"
+    plain = "./testdata/aegis-backup-plain.json"
+    encrypted = "./testdata/aegis-backup-encrypted-TEST.json"
 
     print(f"Use this script at your own risk! It has been built mainly for testing purposes.")
     print(f"This script will encrypt the file {plain} and save it as {encrypted}.")
