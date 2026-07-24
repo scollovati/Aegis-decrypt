@@ -3,6 +3,7 @@ import io
 import json
 import os
 from datetime import datetime
+from pathlib import Path
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
@@ -26,22 +27,36 @@ class Output:
             source_filename: str | None = None,
     ) -> None:
         self._entries = entries
-        self._export_path = export_base_path + "/export/"
         self._search_term = search_term
+        
+        # ----------------------------
+        # 1. Determine base directory # base directory = vault location (preferred) or current dir fallback
+        # ----------------------------
+        if source_filename:
+            base_dir = Path(source_filename).resolve().parent
+        else:
+            base_dir = Path(export_base_path).resolve()
+            
+        # ----------------------------
+        # 2. Create export folder
+        # ----------------------------
+        self._export_path = base_dir / "export"
+        self._export_path.mkdir(parents=True, exist_ok=True)
+        
+        # ----------------------------
+        # 3. Base filename
+        # ----------------------------
+        base_name = Path(source_filename).stem if source_filename else "aegis-backup"
 
-        os.makedirs(os.path.dirname(self._export_path), exist_ok=True)
 
         # Derive the base name from the source filename (without extension) if provided,
         # otherwise fall back to the default placeholder.
-        if source_filename:
-            self.file_path = self._export_path + os.path.splitext(os.path.basename(source_filename))[0]
-        else:
-            self.file_path = self._export_path + "aegis-backup"
-
-        if entry_name is None:
-            self.file_path += "-plain"
-        else:
-            self.file_path += self._gen_filename(entry_name.lower())
+        # ----------------------------
+        # 4. Final file path (NO + operators anywhere)
+        # ----------------------------
+        suffix = "-plain" if entry_name is None else self._gen_filename(entry_name.lower())
+        self.file_path = self._export_path / (base_name + suffix)    
+        self.file_path = str(self.file_path)   
 
     def stdout(self) -> None:
         # TODO add columns header
@@ -130,12 +145,27 @@ class Output:
             print(f"Entries unencrypted saved as: {path}")
 
     def otp(self) -> None:
+        # Calculate timing info once from TOTP entry with shortest period
+        first_totp = None
+        min_period = float('inf')
+        for entry in self._entries:
+            if entry.get("type", "") == "totp":
+                period = entry["info"].get("period", 30)
+                if period < min_period:
+                    min_period = period
+                    first_totp = EntryTOTP(entry)
+        
+        # Display all entries
         for entry in self._entries:
             # Print main entry info
             if entry.get("type", "") == "totp":
                 totp = EntryTOTP(entry)
+                current_code = totp.generate_code()
+                next_code = totp.get_next_code()
+                
                 print(
-                    f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<30} - TOTP generated: {totp.generate_code():<6}"
+                    f"Entry {entry.get('name', ''):<45} - Issuer {entry.get('issuer', ''):<30} - "
+                    f"Current TOTP: {current_code:<6} - Next TOTP: {next_code:<6}"
                 )
             else:
                 print(
@@ -146,6 +176,19 @@ class Output:
             # Only show note if --search is specified AND note contains the search term
             if self._search_term and note and self._search_term.lower() in note.lower():
                 self._print_note_context(note)
+        
+        # Display timestamp, progress bar, and timing info once at the end
+        if first_totp is not None:
+            current_time = first_totp.get_current_timestamp()
+            progress_bar = first_totp.get_progress_bar()
+            time_remaining = first_totp.get_time_remaining()
+            period = first_totp._entry["info"]["period"]
+            next_expiry_total = time_remaining + period
+            
+            print(
+                f"\nCurrent TOTP {progress_bar} "
+                f"\nNext TOTP expires in {next_expiry_total}s\nCurrent Time: {current_time}"
+            )
 
     def json(self) -> None:
         # TODO add aegis headers and groups
